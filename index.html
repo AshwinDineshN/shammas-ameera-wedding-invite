@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shammas & Ameera | Wedding Invitation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #370615;
+            --primary: #370615;
+            --primary-dark: #24040d;
+            --ivory: #fdfaf5;
+            --charcoal: #24040d;
+            --text-light: #fdfaf5;
+            --gold: #d4af37;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Curtain */
+        #curtain-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            z-index: 10;
+        }
+
+        .curtain {
+            width: 50%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                to right,
+                var(--primary-dark),
+                var(--primary) 5%,
+                var(--primary-dark) 10%
+            );
+            background-size: 200% 100%; /* For pleat effect */
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.5); /* Velvet depth */
+            transition: transform 1.5s ease-in-out;
+            position: relative;
+        }
+
+        .curtain::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 50px;
+            background: linear-gradient(to bottom, var(--primary), var(--primary-dark));
+            border-bottom: 5px solid var(--gold); /* Gold trim */
+            box-shadow: 0 5px 10px rgba(0,0,0,0.3);
+        }
+
+        .left-curtain {
+            transform-origin: left;
+        }
+
+        .right-curtain {
+            transform-origin: right;
+        }
+
+        .open .left-curtain {
+            transform: translateX(-100%);
+        }
+
+        .open .right-curtain {
+            transform: translateX(100%);
+        }
+
+        #rope {
+            position: absolute;
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+            width: 10px;
+            height: 150px;
+            background: var(--gold);
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+            z-index: 11;
+        }
+
+        #rope::after {
+            content: '';
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 30px;
+            background: var(--gold);
+            border-radius: 50%;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.3);
+        }
+
+        #pull-text {
+            position: absolute;
+            top: 50%;
+            right: 50px;
+            transform: translateY(-50%);
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            color: var(--text-light);
+            letter-spacing: 2px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.6);
+            z-index: 11;
+        }
+
+        /* Invitation Content */
+        #invitation-content {
+            display: none;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 60px 40px;
+            background: rgba(36,4,13,0.85);
+            border: 1px solid var(--text-light);
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.7);
+            text-align: center;
+            backdrop-filter: blur(4px);
+        }
+
+        .open #invitation-content {
+            display: block;
+        }
+
+        h1 {
+            font-family: 'Pinyon Script', cursive;
+            font-size: 5.5rem;
+            color: var(--text-light);
+            margin: 20px 0 10px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            line-height: 1.2; /* Improved for stacking */
+        }
+
+        h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            color: var(--text-light);
+            margin: 50px 0 20px;
+            position: relative;
+        }
+
+        h2::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 2px;
+            background: var(--text-light);
+            margin: 15px auto;
+            opacity: 0.7;
+        }
+
+        h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.9rem;
+            color: var(--text-light);
+            margin-bottom: 12px;
+        }
+
+        p {
+            font-size: 1.1rem;
+            margin: 8px 0;
+            color: var(--text-light);
+        }
+
+        .couple-photo {
+            width: 320px;
+            max-width: 90%;
+            height: auto;
+            border-radius: 12px;
+            border: 6px solid rgba(253,250,245,0.25);
+            margin: 30px auto;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.6);
+        }
+
+        .event {
+            background: rgba(36,4,13,0.7);
+            border: 1px solid rgba(253,250,245,0.3);
+            border-radius: 10px;
+            padding: 30px;
+            margin: 30px 0;
+            transition: all 0.3s ease;
+        }
+
+        .event:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(253,250,245,0.15);
+            border-color: var(--text-light);
+        }
+
+        a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        a:hover {
+            color: #fff;
+            text-decoration: underline;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 450px;
+            margin: 40px auto;
+        }
+
+        input[type="text"], button {
+            width: 100%;
+            padding: 14px;
+            margin: 12px 0;
+            border: 1px solid rgba(253,250,245,0.4);
+            border-radius: 6px;
+            background: rgba(255,255,255,0.05);
+            color: var(--text-light);
+            font-size: 1rem;
+        }
+
+        .checkbox-group {
+            text-align: left;
+            width: 100%;
+            margin: 10px 0;
+        }
+
+        .checkbox-group label {
+            display: block;
+            margin: 8px 0;
+            font-size: 1rem;
+        }
+
+        input[type="checkbox"] {
+            margin-right: 10px;
+        }
+
+        button {
+            background: var(--text-light);
+            color: var(--primary);
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s;
+        }
+
+        button:hover {
+            background: #e0d9c9;
+            transform: translateY(-2px);
+        }
+
+        /* Countdown Styles */
+        #countdown-section {
+            margin: 40px 0;
+            padding: 20px;
+            background: rgba(36,4,13,0.7);
+            border: 1px solid rgba(253,250,245,0.3);
+            border-radius: 10px;
+        }
+
+        #countdown {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .countdown-item {
+            text-align: center;
+        }
+
+        .countdown-value {
+            font-size: 2.5rem;
+            color: var(--text-light);
+        }
+
+        .countdown-label {
+            font-size: 1rem;
+            color: var(--text-light);
+            opacity: 0.8;
+        }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 4rem; }
+            h2 { font-size: 2.2rem; }
+            h3 { font-size: 1.6rem; }
+            p { font-size: 1rem; }
+            .couple-photo { width: 100%; border-width: 4px; }
+            .event { padding: 20px; }
+            #invitation-content { padding: 30px 20px; max-width: 100%; margin: 20px; }
+            #curtain-container { flex-direction: column; }
+            .curtain { width: 100%; height: 50%; background-size: 100% 200%; }
+            .left-curtain { transform-origin: top; }
+            .right-curtain { transform-origin: bottom; }
+            .open .left-curtain { transform: translateY(-100%); }
+            .open .right-curtain { transform: translateY(100%); }
+            #rope { top: auto; bottom: 20px; right: 50%; transform: translateX(50%); height: 100px; width: 20px; }
+            #rope::after { left: 50%; bottom: -30px; }
+            #pull-text { top: auto; bottom: 140px; right: 50%; transform: translateX(50%); font-size: 1.2rem; }
+            #countdown { font-size: 1.2rem; gap: 10px; flex-wrap: wrap; }
+            .countdown-value { font-size: 2rem; }
+            form { max-width: 100%; padding: 0 10px; }
+        }
+    </style>
+</head>
+<body>
+    <div id="curtain-container">
+        <div class="curtain left-curtain"></div>
+        <div class="curtain right-curtain"></div>
+        <div id="rope" onclick="openCurtain()"></div>
+        <div id="pull-text">Tap me</div>
+    </div>
+
+    <div id="invitation-content">
+        <div class="section">
+            <img src="Shammas Ameera.jpeg" alt="Shammas and Ameera" class="couple-photo">
+            <h1>Shammas<br>&<br>Ameera</h1>
+            <p style="font-size: 1.4rem; margin: 20px 0; color: var(--text-light);">are getting married</p>
+            <p style="font-size: 1.3rem; font-style: italic; color: var(--text-light);">We joyfully invite you to share in our love and celebration</p>
+        </div>
+
+        <div id="countdown-section">
+            <h2>Countdown to Our Wedding</h2>
+            <div id="countdown">
+                <div class="countdown-item">
+                    <span id="days" class="countdown-value">00</span>
+                    <span class="countdown-label">Days</span>
+                </div>
+                <div class="countdown-item">
+                    <span id="hours" class="countdown-value">00</span>
+                    <span class="countdown-label">Hours</span>
+                </div>
+                <div class="countdown-item">
+                    <span id="minutes" class="countdown-value">00</span>
+                    <span class="countdown-label">Minutes</span>
+                </div>
+                <div class="countdown-item">
+                    <span id="seconds" class="countdown-value">00</span>
+                    <span class="countdown-label">Seconds</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Events</h2>
+            <div class="event">
+                <h3>Wedding Ceremony</h3>
+                <p><strong>Date:</strong> 12th April 2026</p>
+                <p><strong>Time:</strong> 11:30 AM</p>
+                <p><strong>Venue:</strong> Highness Auditorium,Pukkattupady,Kochi</p>
+                <a href="https://share.google/fwlhkoy3p9zgfVTQ0" target="_blank">View on Google Maps →</a>
+            </div>
+
+            <div class="event">
+                <h3>Reception</h3>
+                <p><strong>Date:</strong> 12th April 2026</p>
+                <p><strong>Time:</strong> 6:30 PM onwards</p>
+                <p><strong>Venue:</strong> Highway Garden, Convention Centre</p>
+                <a href="https://share.google/JuSuxmcWuPw17A4HX" target="_blank">View on Google Maps →</a>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>RSVP</h2>
+            <p style="margin-bottom: 25px;">Kindly let us know which events you will attend</p>
+            <form id="rsvp-form">
+                <input type="text" name="name" placeholder="Your Name" required>
+                <div class="checkbox-group">
+                    <p><strong>Wedding Ceremony:</strong></p>
+                    <label><input type="radio" name="wedding" value="Yes" required> Yes</label>
+                    <label><input type="radio" name="wedding" value="No"> No</label>
+                </div>
+                <div class="checkbox-group">
+                    <p><strong>Reception:</strong></p>
+                    <label><input type="radio" name="reception" value="Yes" required> Yes</label>
+                    <label><input type="radio" name="reception" value="No"> No</label>
+                </div>
+                <button type="submit">Send RSVP</button>
+            </form>
+        </div>
+
+        <p style="margin-top: 60px; font-style: italic; color: var(--text-light);">With love & gratitude,<br>Shammas & Ameera</p>
+    </div>
+
+    <script>
+        function openCurtain() {
+            document.getElementById('curtain-container').classList.add('open');
+            document.getElementById('pull-text').style.display = 'none';
+            setTimeout(() => {
+                document.getElementById('invitation-content').style.display = 'block';
+                document.body.style.overflow = 'auto';
+                startCountdown();
+                document.getElementById('curtain-container').style.display = 'none';
+            }, 1500); // Match transition duration
+        }
+
+        function startCountdown() {
+            const targetDate = new Date('2026-04-12T11:00:00'); // Wedding date and time (adjust timezone if needed)
+            function updateCountdown() {
+                const now = new Date();
+                const timeDifference = targetDate - now;
+
+                if (timeDifference <= 0) {
+                    document.getElementById('countdown').innerHTML = '<p>The wedding has begun!</p>';
+                    return;
+                }
+
+                const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+
+                document.getElementById('days').textContent = days.toString().padStart(2, '0');
+                document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+                document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+                document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+            }
+
+            updateCountdown();
+            setInterval(updateCountdown, 1000);
+        }
+
+        // Handle RSVP form submission
+        document.getElementById('rsvp-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            const data = {};
+            for (let [key, value] of formData.entries()) {
+                data[key] = value;
+            }
+            
+            fetch('https://script.google.com/macros/s/AKfycbwwpab5Z9tzT15ltoUm0HaesyPp3Q3N78GUh-jtzvMq0N5qMTNc9KwGZe53PFwApNTa2w/exec', {
+                method: 'POST',
+                body: new URLSearchParams(data)
+            })
+            .then(response => response.text())
+            .then(result => {
+                if (result.includes('Success')) {
+                    document.querySelector('.section h2').textContent = 'Thank You!';
+                    document.querySelector('.section p').textContent = 'Your RSVP has been received.';
+                    this.innerHTML = '<p style="color: var(--text-light); font-size: 1.2rem;">Thanks for letting us know!</p>';
+                } else {
+                    alert('There was an error submitting your RSVP. Please try again.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('There was an error submitting your RSVP. Please try again.');
+            });
+        });
+    </script>
+</body>
+</html>
