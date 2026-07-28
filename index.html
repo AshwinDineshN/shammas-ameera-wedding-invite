@@ -3,17 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shammas & Ameera | Wedding Invitation</title>
+    <title>Keerthy Prakash & Aswin Balachandran | Wedding Invitation</title>
     <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-dark: #370615;
-            --primary: #370615;
-            --primary-dark: #24040d;
-            --ivory: #fdfaf5;
-            --charcoal: #24040d;
-            --text-light: #fdfaf5;
-            --gold: #d4af37;
+            --blush: #f5e6e0;
+            --cream: #faf6f3;
+            --soft-pink: #fbd4d4;
+            --mauve: #d4a5a5;
+            --rose-gold: #c9a09a;
+            --dark-text: #5a4a48;
+            --accent-pink: #e8c4c4;
+            --light-accent: #fce8e8;
         }
 
         * {
@@ -24,199 +25,290 @@
 
         body {
             font-family: 'Montserrat', sans-serif;
-            background-color: var(--bg-dark);
-            color: var(--text-light);
-            line-height: 1.6;
+            background: linear-gradient(135deg, #faf6f3 0%, #f5e6e0 100%);
+            color: var(--dark-text);
+            line-height: 1.8;
             min-height: 100vh;
-            overflow: hidden;
+            position: relative;
+            overflow-x: hidden;
         }
 
-        /* Curtain */
+        /* Decorative floral elements */
+        body::before {
+            content: '✿';
+            position: fixed;
+            top: 20px;
+            left: 30px;
+            font-size: 4rem;
+            opacity: 0.2;
+            z-index: 1;
+            color: var(--rose-gold);
+        }
+
+        body::after {
+            content: '✿';
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            font-size: 5rem;
+            opacity: 0.15;
+            z-index: 1;
+            color: var(--mauve);
+            transform: rotate(45deg);
+        }
+
+        /* Subtle background pattern */
+        .floral-bg {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 350px;
+            height: 450px;
+            opacity: 0.12;
+            z-index: 0;
+            background: radial-gradient(ellipse at center, var(--rose-gold) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .floral-bg::before {
+            content: '✿ ✿\A✿\A✿ ✿\A✿\A✿ ✿';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            white-space: pre;
+            font-size: 2.5rem;
+            opacity: 0.15;
+            color: var(--rose-gold);
+            line-height: 2;
+            text-align: center;
+            z-index: 1;
+        }
+
+        .floral-bg-left {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 330px;
+            height: 400px;
+            opacity: 0.12;
+            z-index: 0;
+            background: radial-gradient(ellipse at center, var(--mauve) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .floral-bg-left::after {
+            content: '✿ ✿\A✿\A✿ ✿\A✿\A✿ ✿';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            white-space: pre;
+            font-size: 2.5rem;
+            opacity: 0.15;
+            color: var(--mauve);
+            line-height: 2;
+            text-align: center;
+            z-index: 1;
+        }
+
+        /* Curtain replaced with elegant fade-in */
         #curtain-container {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
+            background: linear-gradient(135deg, #faf6f3 0%, #f5e6e0 100%);
             display: flex;
+            align-items: center;
+            justify-content: center;
             z-index: 10;
+            animation: fadeOut 2s ease-out 3s forwards;
+        }
+
+        @keyframes fadeOut {
+            to {
+                opacity: 0;
+                pointer-events: none;
+            }
         }
 
         .curtain {
-            width: 50%;
-            height: 100%;
-            background: repeating-linear-gradient(
-                to right,
-                var(--primary-dark),
-                var(--primary) 5%,
-                var(--primary-dark) 10%
-            );
-            background-size: 200% 100%; /* For pleat effect */
-            box-shadow: inset 0 0 20px rgba(0,0,0,0.5); /* Velvet depth */
-            transition: transform 1.5s ease-in-out;
-            position: relative;
-        }
-
-        .curtain::before {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 50px;
-            background: linear-gradient(to bottom, var(--primary), var(--primary-dark));
-            border-bottom: 5px solid var(--gold); /* Gold trim */
-            box-shadow: 0 5px 10px rgba(0,0,0,0.3);
-        }
-
-        .left-curtain {
-            transform-origin: left;
-        }
-
-        .right-curtain {
-            transform-origin: right;
-        }
-
-        .open .left-curtain {
-            transform: translateX(-100%);
-        }
-
-        .open .right-curtain {
-            transform: translateX(100%);
-        }
-
-        #rope {
-            position: absolute;
-            top: 50%;
-            right: 20px;
-            transform: translateY(-50%);
-            width: 10px;
-            height: 150px;
-            background: var(--gold);
-            border-radius: 5px;
-            cursor: pointer;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-            z-index: 11;
-        }
-
-        #rope::after {
-            content: '';
-            position: absolute;
-            bottom: -30px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 30px;
-            height: 30px;
-            background: var(--gold);
-            border-radius: 50%;
-            box-shadow: 0 5px 10px rgba(0,0,0,0.3);
+            display: none;
         }
 
         #pull-text {
-            position: absolute;
-            top: 50%;
-            right: 50px;
-            transform: translateY(-50%);
             font-family: 'Playfair Display', serif;
-            font-size: 1.4rem;
-            color: var(--text-light);
-            letter-spacing: 2px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.6);
-            z-index: 11;
+            font-size: 2rem;
+            color: var(--dark-text);
+            letter-spacing: 3px;
+            animation: pulse 2s ease-in-out infinite;
         }
 
-        /* Invitation Content */
-        #invitation-content {
-            display: none;
-            max-width: 800px;
-            margin: 40px auto;
-            padding: 60px 40px;
-            background: rgba(36,4,13,0.85);
-            border: 1px solid var(--text-light);
-            border-radius: 12px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.7);
+        @keyframes pulse {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
+        }
+
+        /* Navigation */
+        nav {
+            position: sticky;
+            top: 0;
+            background: rgba(250, 246, 243, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 25px 0;
             text-align: center;
-            backdrop-filter: blur(4px);
+            border-bottom: 1px solid rgba(212, 165, 165, 0.2);
+            z-index: 5;
+            margin-top: 40px;
         }
 
-        .open #invitation-content {
+        nav a {
+            display: inline-block;
+            margin: 0 20px;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            color: var(--dark-text);
+            text-decoration: none;
+            font-weight: 400;
+            transition: color 0.3s;
+            text-transform: uppercase;
+        }
+
+        nav a:hover {
+            color: var(--rose-gold);
+        }
+
+        /* Main Content */
+        #invitation-content {
             display: block;
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 60px 40px;
+            border-left: 3px solid rgba(212, 165, 165, 0.15);
+            border-right: 3px solid rgba(212, 165, 165, 0.15);
+        }
+
+        #invitation-content::before {
+            content: '🌸 🌸 🌸\A\A\A\A\A🌸 🌸 🌸\A\A\A\A\A🌸 🌸 🌸\A\A\A\A\A🌸 🌸 🌸\A\A\A\A\A🌸 🌸 🌸\A\A\A\A\A🌸 🌸 🌸';
+            position: absolute;
+            left: -60px;
+            top: 0;
+            width: 60px;
+            height: 100%;
+            white-space: pre;
+            font-size: 1.2rem;
+            opacity: 0.4;
+            color: var(--rose-gold);
+            line-height: 1.8;
+            text-align: center;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        #invitation-content::after {
+            content: '🌹 🌹 🌹\A\A\A\A\A🌹 🌹 🌹\A\A\A\A\A🌹 🌹 🌹\A\A\A\A\A🌹 🌹 🌹\A\A\A\A\A🌹 🌹 🌹\A\A\A\A\A🌹 🌹 🌹';
+            position: absolute;
+            right: -60px;
+            top: 0;
+            width: 60px;
+            height: 100%;
+            white-space: pre;
+            font-size: 1.2rem;
+            opacity: 0.4;
+            color: var(--mauve);
+            line-height: 1.8;
+            text-align: center;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .section {
+            margin: 80px 0;
+            text-align: center;
+            position: relative;
         }
 
         h1 {
             font-family: 'Pinyon Script', cursive;
-            font-size: 5.5rem;
-            color: var(--text-light);
-            margin: 20px 0 10px;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
-            line-height: 1.2; /* Improved for stacking */
+            font-size: 5rem;
+            color: var(--dark-text);
+            margin: 30px 0 15px;
+            letter-spacing: 2px;
         }
 
         h2 {
             font-family: 'Playfair Display', serif;
-            font-size: 2.8rem;
-            color: var(--text-light);
-            margin: 50px 0 20px;
+            font-size: 2.4rem;
+            color: var(--dark-text);
+            margin: 50px 0 30px;
             position: relative;
+            font-weight: 400;
         }
 
         h2::after {
-            content: '';
+            content: '✿';
             display: block;
-            width: 80px;
-            height: 2px;
-            background: var(--text-light);
-            margin: 15px auto;
-            opacity: 0.7;
+            font-size: 1.5rem;
+            margin-top: 15px;
+            color: var(--rose-gold);
+            opacity: 0.6;
         }
 
         h3 {
             font-family: 'Playfair Display', serif;
-            font-size: 1.9rem;
-            color: var(--text-light);
-            margin-bottom: 12px;
+            font-size: 1.5rem;
+            color: var(--dark-text);
+            margin: 20px 0 15px;
+            font-weight: 400;
         }
 
         p {
-            font-size: 1.1rem;
-            margin: 8px 0;
-            color: var(--text-light);
+            font-size: 1rem;
+            margin: 10px 0;
+            color: var(--dark-text);
+            opacity: 0.85;
         }
 
         .couple-photo {
-            width: 320px;
-            max-width: 90%;
+            width: 380px;
+            max-width: 100%;
             height: auto;
-            border-radius: 12px;
-            border: 6px solid rgba(253,250,245,0.25);
-            margin: 30px auto;
-            box-shadow: 0 8px 30px rgba(0,0,0,0.6);
+            border-radius: 8px;
+            border: 8px solid var(--cream);
+            margin: 40px auto;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.08);
+            display: block;
         }
 
         .event {
-            background: rgba(36,4,13,0.7);
-            border: 1px solid rgba(253,250,245,0.3);
-            border-radius: 10px;
-            padding: 30px;
-            margin: 30px 0;
-            transition: all 0.3s ease;
+            background: linear-gradient(135deg, #fce8e8 0%, #faf6f3 100%);
+            border: 1px solid rgba(212, 165, 165, 0.3);
+            border-radius: 12px;
+            padding: 40px;
+            margin: 25px 0;
+            transition: all 0.4s ease;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
         }
 
         .event:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(253,250,245,0.15);
-            border-color: var(--text-light);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+            border-color: var(--rose-gold);
         }
 
         a {
-            color: var(--text-light);
+            color: var(--rose-gold);
             text-decoration: none;
             font-weight: 500;
             transition: color 0.3s;
         }
 
         a:hover {
-            color: #fff;
+            color: var(--mauve);
             text-decoration: underline;
         }
 
@@ -226,123 +318,190 @@
             align-items: center;
             max-width: 450px;
             margin: 40px auto;
+            background: rgba(245, 230, 224, 0.5);
+            padding: 40px;
+            border-radius: 12px;
+            border: 1px solid rgba(212, 165, 165, 0.2);
         }
 
         input[type="text"], button {
             width: 100%;
-            padding: 14px;
+            padding: 13px 16px;
             margin: 12px 0;
-            border: 1px solid rgba(253,250,245,0.4);
+            border: 1px solid rgba(212, 165, 165, 0.4);
             border-radius: 6px;
-            background: rgba(255,255,255,0.05);
-            color: var(--text-light);
+            background: rgba(255, 255, 255, 0.7);
+            color: var(--dark-text);
             font-size: 1rem;
+            font-family: 'Montserrat', sans-serif;
+            transition: all 0.3s;
+        }
+
+        input[type="text"]::placeholder {
+            color: var(--dark-text);
+            opacity: 0.5;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            background: white;
+            border-color: var(--rose-gold);
+            box-shadow: 0 0 0 2px rgba(201, 160, 154, 0.1);
         }
 
         .checkbox-group {
             text-align: left;
             width: 100%;
-            margin: 10px 0;
+            margin: 15px 0;
         }
 
         .checkbox-group label {
             display: block;
             margin: 8px 0;
-            font-size: 1rem;
+            font-size: 0.95rem;
+            color: var(--dark-text);
         }
 
-        input[type="checkbox"] {
+        input[type="radio"] {
             margin-right: 10px;
+            accent-color: var(--rose-gold);
         }
 
         button {
-            background: var(--text-light);
-            color: var(--primary);
-            font-weight: bold;
+            background: linear-gradient(135deg, var(--rose-gold) 0%, var(--mauve) 100%);
+            color: white;
+            font-weight: 600;
             cursor: pointer;
             border: none;
             transition: all 0.3s;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            margin-top: 10px;
         }
 
         button:hover {
-            background: #e0d9c9;
-            transform: translateY(-2px);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(201, 160, 154, 0.3);
         }
 
         /* Countdown Styles */
         #countdown-section {
-            margin: 40px 0;
-            padding: 20px;
-            background: rgba(36,4,13,0.7);
-            border: 1px solid rgba(253,250,245,0.3);
-            border-radius: 10px;
+            margin: 60px 0;
+            padding: 40px;
+            background: linear-gradient(135deg, rgba(245, 230, 224, 0.6) 0%, rgba(250, 246, 243, 0.6) 100%);
+            border: 1px solid rgba(212, 165, 165, 0.2);
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.04);
         }
 
         #countdown {
             display: flex;
             justify-content: center;
-            gap: 20px;
-            font-size: 1.5rem;
-            font-weight: bold;
+            gap: 30px;
+            font-size: 1.2rem;
+            flex-wrap: wrap;
         }
 
         .countdown-item {
             text-align: center;
+            padding: 15px 20px;
         }
 
         .countdown-value {
-            font-size: 2.5rem;
-            color: var(--text-light);
+            font-size: 2.8rem;
+            color: var(--rose-gold);
+            font-weight: 700;
+            display: block;
         }
 
         .countdown-label {
-            font-size: 1rem;
-            color: var(--text-light);
-            opacity: 0.8;
+            font-size: 0.85rem;
+            color: var(--dark-text);
+            opacity: 0.7;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            display: block;
         }
 
-        @media (max-width: 600px) {
-            h1 { font-size: 4rem; }
-            h2 { font-size: 2.2rem; }
-            h3 { font-size: 1.6rem; }
-            p { font-size: 1rem; }
-            .couple-photo { width: 100%; border-width: 4px; }
-            .event { padding: 20px; }
-            #invitation-content { padding: 30px 20px; max-width: 100%; margin: 20px; }
-            #curtain-container { flex-direction: column; }
-            .curtain { width: 100%; height: 50%; background-size: 100% 200%; }
-            .left-curtain { transform-origin: top; }
-            .right-curtain { transform-origin: bottom; }
-            .open .left-curtain { transform: translateY(-100%); }
-            .open .right-curtain { transform: translateY(100%); }
-            #rope { top: auto; bottom: 20px; right: 50%; transform: translateX(50%); height: 100px; width: 20px; }
-            #rope::after { left: 50%; bottom: -30px; }
-            #pull-text { top: auto; bottom: 140px; right: 50%; transform: translateX(50%); font-size: 1.2rem; }
-            #countdown { font-size: 1.2rem; gap: 10px; flex-wrap: wrap; }
-            .countdown-value { font-size: 2rem; }
-            form { max-width: 100%; padding: 0 10px; }
+        @media (max-width: 768px) {
+            h1 { font-size: 3.5rem; }
+            h2 { font-size: 1.8rem; }
+            h3 { font-size: 1.2rem; }
+            p { font-size: 0.95rem; }
+            .couple-photo { width: 100%; margin: 30px 0; }
+            .event { padding: 25px; margin: 20px 0; }
+            #invitation-content { padding: 30px 20px; border-left: none; border-right: none; }
+            #invitation-content::before,
+            #invitation-content::after {
+                display: none;
+            }
+            nav { padding: 20px 0; }
+            nav a { display: block; margin: 8px 0; font-size: 0.85rem; }
+            #countdown { gap: 15px; }
+            .countdown-value { font-size: 2.2rem; }
+            form { padding: 25px; }
+            .section { margin: 50px 0; }
+        }
+
+        @media (max-width: 480px) {
+            body::before { font-size: 2rem; }
+            body::after { font-size: 3rem; }
+            h1 { font-size: 2.5rem; }
+            h2 { font-size: 1.5rem; }
+            #countdown { gap: 10px; }
+            .countdown-item { padding: 10px 15px; }
+            .countdown-value { font-size: 1.8rem; }
+            nav a { margin: 5px 10px; font-size: 0.75rem; }
+        }
+
+        .divider {
+            text-align: center;
+            font-size: 1.5rem;
+            color: var(--rose-gold);
+            margin: 30px 0;
+            opacity: 0.6;
+        }
+
+        strong {
+            color: var(--dark-text);
+            font-weight: 600;
         }
     </style>
 </head>
 <body>
+    <div class="floral-bg"></div>
+    <div class="floral-bg-left"></div>
+
     <div id="curtain-container">
-        <div class="curtain left-curtain"></div>
-        <div class="curtain right-curtain"></div>
-        <div id="rope" onclick="openCurtain()"></div>
-        <div id="pull-text">Tap me</div>
+        <div id="pull-text">~ Welcome ~</div>
     </div>
 
+    <nav>
+        <a href="#welcome">Welcome</a>
+        <a href="#story">Our Story</a>
+        <a href="#events">Events</a>
+        <a href="#countdown">Timeline</a>
+        <a href="#rsvp">RSVP</a>
+    </nav>
+
     <div id="invitation-content">
-        <div class="section">
-            <img src="Shammas Ameera.jpeg" alt="Shammas and Ameera" class="couple-photo">
-            <h1>Shammas<br>&<br>Ameera</h1>
-            <p style="font-size: 1.4rem; margin: 20px 0; color: var(--text-light);">are getting married</p>
-            <p style="font-size: 1.3rem; font-style: italic; color: var(--text-light);">We joyfully invite you to share in our love and celebration</p>
+        <div class="section" id="welcome">
+            <img src="KeertyAswin.jpeg" alt="Keerthy Prakash and Aswin Balachandran" class="couple-photo">
+            <h1>Keerthy Prakash<br>&<br>Aswin Balachandran</h1>
+            <p style="font-size: 1.2rem; margin: 20px 0; color: var(--dark-text); opacity: 1;">Together, with our families, we invite you to celebrate</p>
         </div>
 
-        <div id="countdown-section">
+        <div class="section" id="story">
+            <h2>Our Love Story</h2>
+            <p style="font-size: 1.05rem; line-height: 1.9;">Seeking your blessings and good wishes as we embark on this beautiful journey together.</p>
+            <div class="divider">✿</div>
+            <p style="font-size: 0.95rem; line-height: 1.9;">Mrs. Meena Jayaprakash &amp; Mr. P V Jayaprakash<br>and<br>Mrs. Sridevi Balachandran &amp; Mr. Balachandran<br><br>cordially invite you to the wedding celebration of<br><strong style="font-size: 1.1rem;">Keerthy Prakash &amp; Aswin Balachandran</strong></p>
+        </div>
+
+        <div id="countdown-section" id="countdown">
             <h2>Countdown to Our Wedding</h2>
-            <div id="countdown">
+            <div id="countdown" style="margin-top: 30px;">
                 <div class="countdown-item">
                     <span id="days" class="countdown-value">00</span>
                     <span class="countdown-label">Days</span>
@@ -362,67 +521,62 @@
             </div>
         </div>
 
-        <div class="section">
-            <h2>Events</h2>
+        <div class="section" id="events">
+            <h2>Wedding Events</h2>
             <div class="event">
-                <h3>Wedding Ceremony</h3>
-                <p><strong>Date:</strong> 12th April 2026</p>
-                <p><strong>Time:</strong> 11:30 AM</p>
-                <p><strong>Venue:</strong> Highness Auditorium,Pukkattupady,Kochi</p>
-                <a href="https://share.google/fwlhkoy3p9zgfVTQ0" target="_blank">View on Google Maps →</a>
+                <h3>💐 Wedding Ceremony</h3>
+                <p><strong>Date:</strong> Sunday, 23 August 2026</p>
+                <p><strong>Time:</strong> 11:30 AM (1202 Chingam 07)</p>
+                <p><strong>Venue:</strong> <a href="https://www.google.com/search?q=Thottam+Venture&sca_esv=cd5a2ab8cd8e5d3e&rlz=1C1YTUH_enIN1152IN1152&biw=1536&bih=730&sxsrf=APpeQnsroLN3dvftQXT0YiCpKY74cVHF_A%3A1785265754333&ei=Wv5oas33E8Op4-EPscGNqQs&ved=0ahUKEwjNjPeYifaVAxXD1DgGHbFgI7UQ4dUDCBA&uact=5&oq=Thottam+Venture&gs_lp=Egxnd3Mtd2l6LXNlcnAiD1Rob3R0YW0gVmVudHVyZTIEECMYJzIEECMYJzILEC4YrwEYxwEYgAQyCxAAGIAEGIoFGIYDMgsQABiABRiKBRiGAzIIEAAYgAQYogQyBRAAGO8FMggQABiABRiiBDIFEAAY7wUyBRAAGO8FSIUKUNIDWNIDcAF4AZABAJgBd6ABd6oBAzAuMbgBA8gBAPgBAZgCAqACgwHCAgcQIxiwAxgnwgIKEAAYRxjWBBiwA8ICDhAAGOQCGNYEGLAD2AEBwgIXEC4Y3AYYuAYY2gYY2AIYyAMYsAPYAQGYAwCIBgGQBg-6BgYIARABGAmSBwMxLjGgB9UMsgcDMC4xuAd8wgcDMi0yyAcJgAgB&sclient=gws-wiz-serp" target="_blank">Thottam Venture, Chiriyankandathu, Kannara, Thrissur</a></p>
+                <p style="margin-top: 15px; font-size: 0.9rem; opacity: 0.7;">Join us as we celebrate the beginning of forever</p>
             </div>
 
             <div class="event">
-                <h3>Reception</h3>
-                <p><strong>Date:</strong> 12th April 2026</p>
-                <p><strong>Time:</strong> 6:30 PM onwards</p>
-                <p><strong>Venue:</strong> Highway Garden, Convention Centre</p>
-                <a href="https://share.google/JuSuxmcWuPw17A4HX" target="_blank">View on Google Maps →</a>
+                <h3>🎉 Wedding Reception</h3>
+                <p><strong>Date:</strong> Monday, 24 August 2026</p>
+                <p><strong>Time:</strong> 6:30 PM - 10:30 PM</p>
+                <p><strong>Venue:</strong> <a href="https://www.google.com/search?q=Chakolas+Pavilion%2C+Anchery+Chira%2C+Hills+Gardens%2C+Thrissur&rlz=1C1YTUH_enIN1152IN1152&oq=Chakolas+Pavilion%2C+Anchery+Chira%2C+Hills+Gardens%2C+Thrissur&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTIHCAEQIRifBTIHCAIQIRiPAjIHCAMQIRiPAtIBBzQyNWowajeoAgCwAgA&sourceid=chrome&source=chrome.ob&ie=UTF-8" target="_blank">Chakolas Pavilion, Anchery Chira, Hills Gardens, Thrissur</a></p>
+                <p style="margin-top: 15px; font-size: 0.9rem; opacity: 0.7;">An evening of celebration with family and friends</p>
             </div>
         </div>
 
-        <div class="section">
+        <div class="section" id="rsvp">
             <h2>RSVP</h2>
-            <p style="margin-bottom: 25px;">Kindly let us know which events you will attend</p>
+            <p style="margin-bottom: 25px;">Kindly let us know which events you will attend by <strong>August 15, 2026</strong></p>
             <form id="rsvp-form">
                 <input type="text" name="name" placeholder="Your Name" required>
                 <div class="checkbox-group">
-                    <p><strong>Wedding Ceremony:</strong></p>
-                    <label><input type="radio" name="wedding" value="Yes" required> Yes</label>
-                    <label><input type="radio" name="wedding" value="No"> No</label>
+                    <p style="font-weight: 600; margin-bottom: 10px;">Wedding Ceremony</p>
+                    <label><input type="radio" name="wedding" value="Yes" required> I'll be there</label>
+                    <label><input type="radio" name="wedding" value="No"> I'll be absent</label>
                 </div>
                 <div class="checkbox-group">
-                    <p><strong>Reception:</strong></p>
-                    <label><input type="radio" name="reception" value="Yes" required> Yes</label>
-                    <label><input type="radio" name="reception" value="No"> No</label>
+                    <p style="font-weight: 600; margin-bottom: 10px;">Wedding Reception</p>
+                    <label><input type="radio" name="reception" value="Yes" required> I'll be there</label>
+                    <label><input type="radio" name="reception" value="No"> I'll be absent</label>
                 </div>
-                <button type="submit">Send RSVP</button>
+                <button type="submit">Send My RSVP</button>
             </form>
         </div>
 
-        <p style="margin-top: 60px; font-style: italic; color: var(--text-light);">With love & gratitude,<br>Shammas & Ameera</p>
+        <div class="section">
+            <div class="divider" style="margin: 50px 0;">✿</div>
+            <p style="font-size: 1rem; font-style: italic; color: var(--dark-text); opacity: 0.9;">With love and blessings,</p>
+            <h3 style="margin-top: 10px; color: var(--dark-text);">Keerthy Prakash &amp; Aswin Balachandran</h3>
+            <p style="font-size: 0.9rem; margin-top: 20px; opacity: 0.7;">We look forward to celebrating this special moment with you</p>
+        </div>
     </div>
 
     <script>
-        function openCurtain() {
-            document.getElementById('curtain-container').classList.add('open');
-            document.getElementById('pull-text').style.display = 'none';
-            setTimeout(() => {
-                document.getElementById('invitation-content').style.display = 'block';
-                document.body.style.overflow = 'auto';
-                startCountdown();
-                document.getElementById('curtain-container').style.display = 'none';
-            }, 1500); // Match transition duration
-        }
-
         function startCountdown() {
-            const targetDate = new Date('2026-04-12T11:00:00'); // Wedding date and time (adjust timezone if needed)
+            const targetDate = new Date('2026-08-23T11:30:00');
+            
             function updateCountdown() {
                 const now = new Date();
                 const timeDifference = targetDate - now;
 
                 if (timeDifference <= 0) {
-                    document.getElementById('countdown').innerHTML = '<p>The wedding has begun!</p>';
+                    document.getElementById('countdown').innerHTML = '<p style="font-size: 1.2rem; color: var(--rose-gold);">The wedding has begun!</p>';
                     return;
                 }
 
@@ -441,9 +595,39 @@
             setInterval(updateCountdown, 1000);
         }
 
+        // Start countdown when page loads
+        window.addEventListener('load', startCountdown);
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                const href = link.getAttribute('href');
+                if (href.startsWith('#')) {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }
+            });
+        });
+
         // Handle RSVP form submission
         document.getElementById('rsvp-form').addEventListener('submit', function(e) {
             e.preventDefault();
+            
+            // Get the submit button and disable it immediately
+            const submitButton = this.querySelector('button[type="submit"]');
+            if (submitButton.disabled) {
+                return; // Prevent multiple submissions
+            }
+            
+            submitButton.disabled = true;
+            submitButton.style.opacity = '0.6';
+            submitButton.style.cursor = 'not-allowed';
+            const originalButtonText = submitButton.textContent;
+            submitButton.textContent = 'Submitting...';
+            
             const formData = new FormData(this);
             const data = {};
             for (let [key, value] of formData.entries()) {
@@ -457,16 +641,23 @@
             .then(response => response.text())
             .then(result => {
                 if (result.includes('Success')) {
-                    document.querySelector('.section h2').textContent = 'Thank You!';
-                    document.querySelector('.section p').textContent = 'Your RSVP has been received.';
-                    this.innerHTML = '<p style="color: var(--text-light); font-size: 1.2rem;">Thanks for letting us know!</p>';
+                    alert('Thank you! Your RSVP has been received.');
+                    this.innerHTML = '<p style="color: var(--rose-gold); font-size: 1.1rem; text-align: center;">✓ Thank you for your RSVP!</p>';
                 } else {
                     alert('There was an error submitting your RSVP. Please try again.');
+                    submitButton.disabled = false;
+                    submitButton.style.opacity = '1';
+                    submitButton.style.cursor = 'pointer';
+                    submitButton.textContent = originalButtonText;
                 }
             })
             .catch(error => {
                 console.error('Error:', error);
                 alert('There was an error submitting your RSVP. Please try again.');
+                submitButton.disabled = false;
+                submitButton.style.opacity = '1';
+                submitButton.style.cursor = 'pointer';
+                submitButton.textContent = originalButtonText;
             });
         });
     </script>
